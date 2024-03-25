@@ -1,14 +1,14 @@
-module github.com/deepmap/oapi-codegen/v2/internal/test/strict-server/stdhttp
+module github.com/jKiler/oapi-codegen/internal/test/strict-server/stdhttp
 
 go 1.22
 
-replace github.com/deepmap/oapi-codegen/v2 => ../../../../
+replace github.com/jKiler/oapi-codegen => ../../../../
 
-replace github.com/deepmap/oapi-codegen/v2/internal/test => ../..
+replace github.com/jKiler/oapi-codegen/internal/test => ../..
 
 require (
-	github.com/deepmap/oapi-codegen/v2 v2.0.0-00010101000000-000000000000
-	github.com/deepmap/oapi-codegen/v2/internal/test v0.0.0-00010101000000-000000000000
+	github.com/jKiler/oapi-codegen v1.0.0-00010101000000-000000000000
+	github.com/jKiler/oapi-codegen/internal/test v0.0.0-00010101000000-000000000000
 	github.com/getkin/kin-openapi v0.122.0
 	github.com/oapi-codegen/runtime v1.1.0
 	github.com/oapi-codegen/testutil v1.1.0

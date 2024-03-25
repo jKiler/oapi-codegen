@@ -68,7 +68,7 @@ write a lot of boilerplate code to perform all the marshaling and unmarshaling
 into objects which match the OpenAPI 3.0 definition. The code generator in this
 directory does a lot of that for you. You would run it like so:
 
-    go install github.com/deepmap/oapi-codegen/v2/cmd/oapi-codegen@latest
+    go install github.com/jKiler/oapi-codegen/cmd/oapi-codegen@latest
     oapi-codegen -package petstore petstore-expanded.yaml > petstore.gen.go
 
 Let's go through that `petstore.gen.go` file to show you everything which was
@@ -443,7 +443,7 @@ func RegisterHandlersWithOptions(router fiber.Router, si ServerInterface, option
 ```go
 import (
         "github.com/gofiber/fiber/v2"
-        "github.com/deepmap/oapi-codegen/v2/examples/petstore-expanded/fiber/api"
+        "github.com/jKiler/oapi-codegen/examples/petstore-expanded/fiber/api"
         middleware "github.com/oapi-codegen/fiber-middleware"
 )
 
