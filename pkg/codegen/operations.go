@@ -39,7 +39,7 @@ type ParameterDefinition struct {
 // TypeDef is here as an adapter after a large refactoring so that I don't
 // have to update all the templates. It returns the type definition for a parameter,
 // without the leading '*' for optional ones.
-func (pd ParameterDefinition) TypeDef() string {
+func (pd *ParameterDefinition) TypeDef() string {
 	typeDecl := pd.Schema.TypeDecl()
 	return typeDecl
 }
@@ -114,7 +114,7 @@ func (pd *ParameterDefinition) Explode() bool {
 	return *pd.Spec.Explode
 }
 
-func (pd ParameterDefinition) GoVariableName() string {
+func (pd *ParameterDefinition) GoVariableName() string {
 	name := LowercaseFirstCharacter(pd.GoName())
 	if IsGoKeyword(name) {
 		name = "p" + UppercaseFirstCharacter(name)
@@ -125,7 +125,7 @@ func (pd ParameterDefinition) GoVariableName() string {
 	return name
 }
 
-func (pd ParameterDefinition) GoName() string {
+func (pd *ParameterDefinition) GoName() string {
 	goName := pd.ParamName
 	if _, ok := pd.Spec.Extensions[extGoName]; ok {
 		if extGoFieldName, err := extParseGoFieldName(pd.Spec.Extensions[extGoName]); err == nil {
@@ -135,7 +135,17 @@ func (pd ParameterDefinition) GoName() string {
 	return SchemaNameToTypeName(goName)
 }
 
-func (pd ParameterDefinition) IndirectOptional() bool {
+func (pd *ParameterDefinition) QueryParamName() string {
+	queryParamName := pd.ParamName
+	if _, ok := pd.Spec.Extensions[extQueryParamName]; ok {
+		if extGoFieldName, err := extParseGoFieldName(pd.Spec.Extensions[extQueryParamName]); err == nil {
+			queryParamName = extGoFieldName
+		}
+	}
+	return queryParamName
+}
+
+func (pd *ParameterDefinition) IndirectOptional() bool {
 	return !pd.Required && !pd.Schema.SkipOptionalPointer
 }
 
